@@ -1,0 +1,57 @@
+
+================================================================================
+# IMAGE and GALFIT CONTROL PARAMETERS
+A) images/4708cut.fits   # Input data image (FITS file)
+B) images/4708gal.fits   # Output data image block
+C) None                  # Sigma image name (made from data if blank or "none")
+D) tony_psf.fits         # Input PSF image and (optional) diffusion kernel
+E) 3                     # PSF fine sampling factor relative to data
+F) None                  # Bad pixel mask (FITS image or ASCII coord list)
+G) constraints/4708      # File with parameter constraints (ASCII file) 
+H) 1 200 1 200           # Image region to fit (xmin xmax ymin ymax)
+I) 200 200               # Size of the convolution box (x y)
+J) 28.178874             # Magnitude photometric zeropoint 
+K) 0.060000 0.060000     # Plate scale (dx dy)   [arcsec per pixel]
+O) regular               # Display type (regular, curses, both)
+P) 0                     # Choose: 0=optimize, 1=model, 2=imgblock, 3=subcomps
+    
+ 0) sky
+ 1) 297.58     1         # sky background       [ADU counts]
+ 2) 0.00       0         # dsky/dx (sky gradient in x) 
+ 3) 0.00       0         # dsky/dy (sky gradient in x) 
+ Z) 0                    #  Skip this model in output image?  (yes=1, no=0)
+    
+ 0) psf                  # object type
+ 1) 100.93 101.17  0 0   # position x, y        [pixel]
+ 3) 19.95   1            # total magnitude
+ Z) 0                    #  Skip this model in output image?  (yes=1, no=0)
+ 
+
+ 0) sersic                    # object type
+ 1) 101.35 101.52  0 0        # position x, y [pixel]
+ 3) 18.05   1                 # total mag
+ 4) 12.28   1                 # length
+ 5) 1.45    1                 # index
+ 9) 0.96    1                 # axis ratio
+ 10) 29.76  0                 # PA
+ Z) 0                         # Skip in output image?
+
+
+ 0) sersic                    # object type
+ 1) 176.39 84.06  0 0         # position x, y        [pixel]
+ 3) 24.84    0                # total magnitude
+ 4) 2.46     0                # length
+ 5) 1.00     0                # index
+ 9) 0.77     0                # axis ratio
+ 10) -80.58  0                # PA
+ Z) 0                         # Skip this model in output image?  (yes=1, no=0)
+
+ 0) sersic                    # object type
+ 1) 189.15 34.44  0 0         # position x, y        [pixel]
+ 3) 23.96    0                # total magnitude
+ 4) 0.89     0                # length
+ 5) 2.40     0                # index
+ 9) 0.88     0                # axis ratio
+ 10) -7.62   0                # PA
+ Z) 0                         # Skip this model in output image?  (yes=1, no=0)
+

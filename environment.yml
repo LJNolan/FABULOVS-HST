@@ -1,0 +1,19 @@
+name: fabulovs-hst2
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - astropy
+  - ipython
+  - jupyter
+  - matplotlib
+  - nb_conda_kernels
+  - numpy
+  - photutils
+  - python=3.11
+  - scipy
+  - statmorph=0.5.7
+  - spyder
+  - seaborn
+  - scikit-learn
+prefix: /Users/ljnolan/opt/anaconda3/envs/fabulovs-hst2

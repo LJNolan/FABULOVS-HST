@@ -1,0 +1,21 @@
+\begin{table*}
+\centering
+\caption{
+Statistics ($S$) and p-values ($p$) from the Kolmogorov-Smirnov ($KS$) and
+Mann-Whitney U ($MWU$) tests run on merger statistics.  A p-value of \leq 0.05
+indicates our SoI and control come from different underlying populations.
+}
+\label{tab:mst}
+\begin{tabular}{ cccccccc }
+\hline
+-99.0 & Sérsic index & $A_{net}$ & $A_{S, net}$ & S(G, M$_{20}$)$_{net}$ & $A_{sub}$ & $A_{S, sub}$ & S(G, M$_{20}$)$_{sub}$ \\
+\hline\hline
+$S_{KS}$ & 0.25 & 0.375 & 0.5 & 0.375 & 0.375 & 0.625 & 0.25 \\
+\hline
+$p_{KS}$ & 0.98 & 0.66 & 0.283 & 0.66 & 0.66 & 0.087 & 0.98 \\
+\hline
+$S_{MWU}$ & 39.0 & 28.5 & 45.0 & 27.5 & 33.5 & 12.5 & 31.5 \\
+\hline
+$p_{MWU}$ & 0.505 & 0.751 & 0.188 & 0.672 & 0.916 & 0.045 & 1.0 \\
+\end{tabular}
+\end{table*}

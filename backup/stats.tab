@@ -1,0 +1,48 @@
+\begin{table*}
+\centering
+\caption{
+Merger statistics for the SoI and control sample; $A_{net}$, $A_{S, net}$, and
+S(G, M$_{20}$)$_{net}$ are the asymmetry, shape asymmetry, and Gini-M20 metrics
+as described in Section \ref{sec:met} for the full science image, and those
+with the -sub prefix are for the science image minus the central PSF model.
+\Sersic\ indices from poorly constrained fits, as above, are marked with an
+asterisk(*).
+}
+\label{tab:met}
+\begin{tabular}{ cccccccccc }
+\hline
+Name & Sample & Fit $\chi^{2}/\nu$ & Sérsic index & $A_{net}$ & $A_{S, net}$ & S(G, M$_{20}$)$_{net}$ & $A_{sub}$ & $A_{S, sub}$ & S(G, M$_{20}$)$_{sub}$ \\
+\hline\hline
+J0847+3732 & SoI & 1.76 & 4.04 & 0.16 & 0.1 & -0.09 & 0.32 & 0.26 & 0.05 \\
+\hline
+J0852+2004 & SoI & 1.37 & 2.99 & 0.09 & 0.18 & -0.01 & 0.14 & 0.22 & -0.01 \\
+\hline
+J0928+6025 & SoI & 4.09 & 4.81 & 0.16 & 0.09 & -0.13 & 0.31 & 0.23 & 0.01 \\
+\hline
+J1112+1813 & SoI & 1.7 & 3.2 & 0.06 & 0.25 & -0.04 & 0.07 & 0.26 & -0.03 \\
+\hline
+J1229-0035 & SoI & 1.88 & 4.2 & 0.14 & 0.16 & -0.09 & 1.25 & 0.33 & 0.09 \\
+\hline
+J1345+1144 & SoI & 2.03 & 2.8 & 0.06 & 0.39 & -0.03 & 0.07 & 0.39 & -0.03 \\
+\hline
+J1410+3643 & SoI & 1.58 & 2.21 & 0.07 & 0.2 & -0.1 & 0.07 & 0.2 & -0.1 \\
+\hline
+J1537+0055 & SoI & 2.9 & 1.82 & 0.1 & 0.21 & -0.06 & 0.1 & 0.21 & -0.06 \\
+\hline
+003516.88-104731.2 & Control & 1.46 & 1.46 & 0.13 & 0.08 & -0.09 & 0.2 & 0.39 & -0.01 \\
+\hline
+005838.95-102651.3 & Control & 1.46 & 3.07 & 0.11 & 0.08 & -0.06 & 0.12 & 0.22 & 0.0 \\
+\hline
+083158.49+503444.1 & Control & 1.68 & 2.53 & 0.1 & 0.29 & -0.08 & 0.16 & 0.61 & -0.03 \\
+\hline
+093027.21+240232.7 & Control & 2.64 & 2.58 & 0.13 & 0.3 & -0.01 & 0.12 & 0.39 & -0.05 \\
+\hline
+111800.12+233651.5 & Control & 2.18 & 4.73 & 0.08 & 0.05 & -0.06 & 0.12 & 0.29 & -0.03 \\
+\hline
+114744.11-014601.5 & Control & 1.47 & 1.06 & 0.13 & 0.17 & -0.07 & 0.27 & 0.46 & 0.04 \\
+\hline
+121118.66+143810.4 & Control & 1.27 & 3.75 & 0.11 & 0.12 & -0.08 & 0.1 & 0.29 & 0.0 \\
+\hline
+210927.29-061015.1 & Control & 2.15 & 3.94 & 0.08 & 0.08 & -0.05 & 0.05 & 0.27 & -0.02 \\
+\end{tabular}
+\end{table*}

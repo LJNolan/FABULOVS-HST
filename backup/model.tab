@@ -1,0 +1,70 @@
+\begin{table*}
+\centering
+\caption{
+\galfit\ model parameters and associated data, for the SoI and control
+ sample.  Values above the following thresholds indicate mergers:
+ $A\geq0.35$, $A_S\geq0.4$, S(G, M$_{20}$)$\geq0$ 
+ \citep{wilkinson_merger_2022}.
+}
+\label{tab:cat}
+\begin{tabular}{ ccccccccc }
+\hline
+Name & Sample & Fit $\chi^{2}/\nu$ & Component & Mag & $R_{eff} [pix]$ & Sérsic index & Axis Ratio & Pos. Angle \\
+\hline\hline
+J0847+3732 & SoI & 1.76 & sersic & 21.3 & 12.7 & 4.04 & 0.68 & 34.3 \\
+ &  &  & psf & 19.9 &  &  &  &  \\
+ &  &  & contaminant & 22.7 & 13.9 & 1.86 & 0.33 & 89.5 \\
+ &  &  & contaminant & 22.0 & 12.2 & 1.63 & 0.62 & -58.9 \\
+\hline
+J0852+2004 & SoI & 1.37 & sersic & 20.5 & 9.6 & 2.99 & 0.83 & 38.5 \\
+ &  &  & psf & 20.9 &  &  &  &  \\
+\hline
+J0928+6025 & SoI & 4.09 & sersic & 19.3 & 11.0 & 4.81 & 0.95 & -9.8 \\
+ &  &  & psf & 19.0 &  &  &  &  \\
+ &  &  & contaminant & 20.4 & 9.6 & 4.96 & 0.96 & 17.1 \\
+\hline
+J1112+1813 & SoI & 1.7 & sersic & 18.6 & 29.5 & 3.2 & 0.35 & 15.8 \\
+ &  &  & psf & 19.9 &  &  &  &  \\
+\hline
+J1229-0035 & SoI & 1.88 & sersic & 20.9 & 8.8 & 4.2 & 0.77 & 56.8 \\
+ &  &  & psf & 20.3 &  &  &  &  \\
+\hline
+J1345+1144 & SoI & 2.03 & sersic & 18.4 & 34.1 & 2.8 & 0.96 & -78.4 \\
+ &  &  & psf & 23.8 &  &  &  &  \\
+ &  &  & contaminant & 22.0 & 18.5 & 2.51 & 0.79 & 24.8 \\
+ &  &  & contaminant & 22.2 & 20.6 & 1.66 & 0.72 & -62.1 \\
+\hline
+J1410+3643 & SoI & 1.58 & sersic & 20.9 & 15.3 & 2.21 & 0.9 & 36.0 \\
+ &  &  & psf & 26.0 &  &  &  &  \\
+ &  &  & contaminant & 23.7 & 5.0 & 3.82 & 0.68 & -44.7 \\
+\hline
+J1537+0055 & SoI & 2.9 & sersic & 18.0 & 12.1 & 1.82 & 0.97 & 21.7 \\
+ &  &  & psf & 20.3 &  &  &  &  \\
+\hline
+003516.88-104731.2 & Control & 1.46 & sersic & 22.4 & 7.9 & 1.46 & 0.74 & 64.7 \\
+ &  &  & psf & 21.5 &  &  &  &  \\
+\hline
+005838.95-102651.3 & Control & 1.46 & sersic & 20.8 & 7.8 & 3.07 & 0.33 & -33.8 \\
+ &  &  & psf & 20.6 &  &  &  &  \\
+\hline
+083158.49+503444.1 & Control & 1.68 & sersic & 21.1 & 11.4 & 2.53 & 0.5 & 49.9 \\
+ &  &  & psf & 21.3 &  &  &  &  \\
+\hline
+093027.21+240232.7 & Control & 2.64 & sersic & 20.4 & 16.6 & 2.58 & 0.48 & -79.5 \\
+ &  &  & psf & 21.0 &  &  &  &  \\
+\hline
+111800.12+233651.5 & Control & 2.18 & sersic & 20.2 & 15.4 & 4.73 & 0.83 & -89.5 \\
+ &  &  & psf & 20.9 &  &  &  &  \\
+ &  &  & contaminant & 23.2 & 11.7 & 3.05 & 0.9 & 13.4 \\
+\hline
+114744.11-014601.5 & Control & 1.47 & sersic & 22.6 & 10.9 & 1.06 & 0.59 & 20.9 \\
+ &  &  & psf & 20.9 &  &  &  &  \\
+ &  &  & contaminant & 24.3 & 10.0 & 0.37 & 0.44 & 45.3 \\
+\hline
+121118.66+143810.4 & Control & 1.27 & sersic & 21.9 & 11.4 & 3.75 & 0.55 & 72.9 \\
+ &  &  & psf & 21.7 &  &  &  &  \\
+\hline
+210927.29-061015.1 & Control & 2.15 & sersic & 20.9 & 11.4 & 3.94 & 0.77 & 53.1 \\
+ &  &  & psf & 21.6 &  &  &  &  \\
+\end{tabular}
+\end{table*}

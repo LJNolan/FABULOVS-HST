@@ -1,0 +1,32 @@
+
+# Component/    parameter   constraint  Comment
+# operation    (see below)    range
+
+# Component 2: psf
+      2           x          -2 2      #
+      2           y          -2 2      #
+      2           3          -5 5      # mag
+
+# Component 3: sersic
+      3           x          -2 2      #
+      3           y          -2 2      #
+      3           3          -5 5      # mag
+      3           4          5 to 50   # length
+      3           5        0.3 to 8    # index
+      3           9        0.1 to 1    # axis ratio
+
+# Component 4: sersic
+      4           x          -2 2      #
+      4           y          -2 2      #
+      4           3          -5 5      # mag
+      4           4          5 to 50   # length
+      4           5        0.3 to 8    # index
+      4           9        0.1 to 1    # axis ratio
+
+# Component 5: sersic
+      5           x          -2 2      #
+      5           y          -2 2      #
+      5           3          -5 5      # mag
+      5           4          5 to 50   # length
+      5           5        0.3 to 8    # index
+      5           9        0.1 to 1    # axis ratio
