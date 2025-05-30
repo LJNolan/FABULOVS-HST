@@ -1097,20 +1097,6 @@ def rad_prof_from_file(file='image', ext=0, inputdir='.', loc=(-1,-1),
    Background subtraction is unnecessary when using GALFIT subcomps.
 
    """
-# =============================================================================
-# This function acts as a utility wrapper for radial_profile, pulling the 
-# header information from 'image.fits' at the optional directory string
-# (inputdir), and data from the optional file string (file) + '.fits' at the
-# optional extension int (ext), and then makes a radial profile around a pixel
-# point optionally given by a tuple of ints (loc). It assumes the desired
-# radius is some float fraction of half the image size (radfrac), and does
-# background subtraction (toggled by bksb). Can optionally return radius in 
-# arcsec (toggled by getr). kwargs are passed to radial_profile.
-#
-# Background subtraction is unnecessary when using GALFIT subcomps.
-#
-# Dependencies: dataPull, radial_profile, getBkgrd
-# =============================================================================
    datafile = '%s/%s.fits' % (inputdir, file)
    image = '%s/image.fits' % inputdir
    data = dataPull(datafile, ext=ext)
@@ -1141,19 +1127,50 @@ def rad_prof_from_file(file='image', ext=0, inputdir='.', loc=(-1,-1),
 
 def radial_profile(data, radii, wcs, coord, fscale, zp, exptime=1., flx=False,
                    mask=None):
-# =============================================================================
-# This function takes in data (ndarray), a set of consecutive radii at which to
-# take the profile (ndarray radii), coordinate information (astropy wcs), a
-# target coordinate (SkyCoord coord), a plate scale in arcsec/pixel (float
-# fscale), a photometric zeropoint (float zp), and an optional exposure time
-# for if data is in a non-rate unit (float exptime), and returns a numpy array
-# of the radial profile over that radius around the given object.  Can be
-# toggled to return fluxes or magnitudes / area (boolean flx) where what I mean
-# by that is units of [whatever a pixel's units are] per [angular area unit as
-# given by the square of fscale] - for example, electrons per arcsec^2 - or
-# that quantity converted to a magnitude per [angular area unit as given by the
-# square of fscale].
-# =============================================================================
+   """
+   Produces a radial profile describing the brightness of an image from the
+   center outwards.  Inputs are processed by photutils RadialProfile.
+
+   Parameters
+   ----------
+   data : ndarray
+      2-dimensional array of image data to be profiled.
+      
+   radii : ndarray
+      Desired radii at which to take profile.
+      
+   wcs : astropy wcs
+      WCS for image.
+      
+   coord : SkyCoord coord
+      Target coordinate upon which to center profile.
+      
+   fscale : float
+      Plate scale in arcsec/pixel.
+      
+   zp : float
+      Photometric zeropoint.
+      
+   exptime : float, optional
+      Optional exposure time if data is in a non-rate unit. The default is 1.
+      
+   flx : bool, optional
+      Toggle to return profile in fluxes or magnitudes / area - by which I mean
+      units of [whatever a pixel's units are] per [angular area unit as given
+      by the square of fscale] - for example, electrons per arcsec^2 - or that
+      quantity converted to a magnitude per [angular area unit as given by the
+      square of fscale]. The default is False, which produces magnitudes /
+      area.
+      
+   mask : ndarray, optional
+      Optional image mask. The default is None.
+
+   Returns
+   -------
+   mus: ndarray
+      The desired radial profile at the given radii.
+
+   """
    xycen = skycoord_to_pixel(coord, wcs=wcs)
    if mask is None:
       rp = RadialProfile(data, xycen, radii)
@@ -1168,13 +1185,20 @@ def radial_profile(data, radii, wcs, coord, fscale, zp, exptime=1., flx=False,
 
 
 def latex_tab(inputdir='.'):
-# =============================================================================
-# This function takes an optional directory string (inputdir) from which to
-# pull the fit information of the most recent run (in galfit.01) and file that
-# as a LaTeX-compatible table (fit.tab).
-#
-# Dependencies: input_to_guess
-# =============================================================================
+   """
+   Pulls the fit information from the most recent run (in galfit.01) and store
+   that as a LaTeX-compatible table.
+
+   Parameters
+   ----------
+   inputdir : string, optional
+      Directory to find fit information. The default is '.'.
+
+   Returns
+   -------
+   None.
+
+   """
    param_file = '%s/galfit.01' % inputdir
    paramss = input_to_guess(param_file)
    names = ['kind', 'x', 'y', 'mag', 'length', 'sersic', 'axis ratio', 'angle']
@@ -1204,14 +1228,28 @@ def latex_tab(inputdir='.'):
 
 
 def plotutils(ax, xscale='linear', yscale='linear'):
-# =============================================================================
-# This function applies my favorite formatting to normal, 2D figures on a given
-# matplotlib Axes object (ax). It enables minor tick marks, sets all marks as
-# inward-facing, and enables right and top marks.  It can optionally change the
-# x and y scale to, say, log, with a given string. Credit and curses to Rogier
-# Windhorst for ingraining this formatting in my mind.  Also present in my
-# package supernolan.
-# =============================================================================
+   """
+   Applies my favorite formatting to normal, 2D figures, enabling minor tick
+   marks, setting all marks as inward-facing, and enabling right and top marks.
+   Can optionally change the x/y scale to, say, log. Credit and curses to
+   Rogier Windhorst for ingraining this formatting in my mind.
+
+   Parameters
+   ----------
+   ax : matplotlib axis
+      Desired axis on which to apply changes.
+      
+   xscale : string, optional
+      Desired x-axis scaling. The default is 'linear'.
+      
+   yscale : string, optional
+      Desired y-axis scaling. The default is 'linear'.
+
+   Returns
+   -------
+   None.
+
+   """
    ax.xaxis.set_minor_locator(AutoMinorLocator())
    ax.yaxis.set_minor_locator(AutoMinorLocator())
    ax.tick_params(which='both', direction='in', right=True, top=True)
@@ -1221,24 +1259,46 @@ def plotutils(ax, xscale='linear', yscale='linear'):
 
 
 def cp_psf(file, todir='.'):
-# =============================================================================
-# This function takes in the path where to find the PSF model GALFIT should use
-# (file), and then the working directory to save that file under the name 
-# 'psf.fits'. Important to note: "file" must be as relative to "todir", or the 
-# full path.
-# =============================================================================
+   """
+   Copies desired PSF model to working directory, saving it under 'psf.fits'.
+
+   Parameters
+   ----------
+   file : str
+      Full path to the desired PSF model. Must be as relative to 
+      ```todir```, if using.
+      
+   todir : str, optional
+      Path to working directory. The default is '.'.
+
+   Returns
+   -------
+   None.
+
+   """
    os.system("cd %s ; cp %s psf.fits" % (todir, file))
    return
 
 
 def get_flags(file=None, fromdir='.'):
-# =============================================================================
-# This function takes in an optional string file prefix (file) and input
-# directory (fromdir) and returns whether any important errors were produced
-# during the appropriate run of GALFIT.  Returns 1 if maximum number of
-# iterations was reached, 2 if there was a numerical convergence error, and 0
-# if neither.
-# ============================================================================= 
+   """
+   Checks for errors produced during the supplied run of GALFIT.
+
+   Parameters
+   ----------
+   file : str, optional
+      File to check for flags. The default is None, which looks for galfit.fits.
+      
+   fromdir : str, optional
+      Directory from which to retrieve file. The default is '.'.
+
+   Returns
+   -------
+   flags : int
+      1 if maximum number of iterations was reached, 2 if there was a numerical
+      convergence error, and 0 if neither.
+
+   """ 
    flag = 0
    if file is None:
       filename = '%s/galfit.fits' % (fromdir)
@@ -1254,12 +1314,30 @@ def get_flags(file=None, fromdir='.'):
 
 
 def get_header_param(param, ext=1, file=None, fromdir='.'):
-# =============================================================================
-# This function takes in a desired parameter string (param), an optional
-# extension int (ext), an optional file string name (file), and an optional
-# directory string (fromdir) and returns that parameter from the given file's
-# given extension in the given directory.
-# =============================================================================
+   """
+   Pulls a desired parameter from a given FITS file.
+
+   Parameters
+   ----------
+   param : str
+      Desired header parameter.
+      
+   ext : int, optional
+      Extension to pull from. The default is 1.
+      
+   file : str, optional
+      Desired FITS file. The default is None, which will pull from
+      'galfit.fits'.
+      
+   fromdir : str, optional
+      Directory where to find file. The default is '.'.
+
+   Returns
+   -------
+   prm
+      Header result.
+
+   """
    if file is None:
       filename = '%s/galfit.fits' % (fromdir)
    else:
@@ -1270,12 +1348,31 @@ def get_header_param(param, ext=1, file=None, fromdir='.'):
 
 
 def to_latex(tab, outputdir='.', tabname=None, delval='-99.0'):
-# =============================================================================
-# Modified version of latex_tab that takes in an astropy table (tab) and spits
-# out a latex table to a given directory, cutting out a given string value that
-# represents a desired "blank" in the table, default -99 (delval). If None is
-# passed to delval, no checks for blank values will be performed.
-# =============================================================================
+   """
+   Produces and saves a latex table from given Astropy table, creating blanks
+   as desired.
+
+   Parameters
+   ----------
+   tab : astropy table
+      Desired table to pass to a latex file.
+      
+   outputdir : str, optional
+      Directory where to store the file. The default is '.'.
+      
+   tabname : str, optional
+      File name to store latex table. The default is None, storing under
+      'fit.tab'.
+      
+   delval : str, optional
+      Value which should be excised from latex table, leaving blanks. The
+      default is '-99.0'.
+
+   Returns
+   -------
+   None.
+
+   """
    if tabname is None:
       tabname = '%s/fit.tab' % outputdir
    else:
@@ -1289,14 +1386,31 @@ def to_latex(tab, outputdir='.', tabname=None, delval='-99.0'):
    return
 
 
+
 def from_latex(fromdir='.', tabname='fit.tab', delval=None, masked=True):
-# =============================================================================
-# Performs the inverse of to_latex, taking in an optional directory (fromdir)
-# and table name (tabname) for a latex table, (plus a toggle for returning a 
-# masked array, recommended to leave this on) and spits out an Astropy Table,
-# optionally adding a given value that represents a desired "blank" in the
-# table (delval).
-# =============================================================================
+   """
+   Inverse of to_latex, returning an astropy table from given latex table,
+   optionally adding a desired value to replace blanks.
+
+   Parameters
+   ----------
+   fromdir : str, optional
+      Directory from which to pull file. The default is '.'.
+      
+   tabname : str, optional
+      Name of table file. The default is 'fit.tab'.
+      
+   delval : str, optional
+      Value to replace blanks. The default is None.
+      
+   masked : str, optional
+      Passed to Astropy Table. The default is True.
+
+   Returns
+   -------
+   tab : astropy table
+
+   """
    fulltab = '%s/%s' % (fromdir, tabname)
    tab = Table.read(fulltab, format='latex')
    tab = Table(tab, masked=masked, copy=False)
@@ -1306,12 +1420,31 @@ def from_latex(fromdir='.', tabname='fit.tab', delval=None, masked=True):
 
 
 def percentile_cut(data, lower=None, upper=None, truncate=True):
-# =============================================================================
-# Does what I wish astropy PercentileInterval did.  Takes a numpy array (data),
-# float lower percentile bound (lower), upper bound (upper) and optional toggle
-# for truncation vs nan replacement (truncate).  Returns a copy of the given
-# array with values outside bounds removed/truncated as indicated.
-# =============================================================================
+   """
+   Does what I wish astropy PercentileInterval did. Returns a copy of the given
+   array with values outside bounds removed/truncated.
+
+   Parameters
+   ----------
+   data : ndarray
+      Input array.
+      
+   lower : float, optional
+      Lower percentile bound. The default is None.
+      
+   upper : float, optional
+      Upper percentile bound. The default is None.
+      
+   truncate : bool, optional
+      Toggle behavior to truncate or remove values past upper and lower bounds.
+      The default is True, truncating (setting values past the bound to bound).
+
+   Returns
+   -------
+   datat : ndarray
+      Altered array
+
+   """
    if lower is None:
       if upper is None:
          return data
@@ -1338,16 +1471,50 @@ def percentile_cut(data, lower=None, upper=None, truncate=True):
 
 
 def errmap_HST(file, box_size=100, purity=0.05, overlap=0.2, nbox_min=20):
-# =============================================================================
-# This function takes a file path of a HST FITS file (file), desired
-# estimation box size in pixels(box_size), purity fraction (purity), overlap 
-# fraction (overlap), and number of boxes (nbox_min), and generates a sigma 
-# image by empirically estimating the scaling factor between the true SCI
-# background standard deviation and the average value of the WHT image. The WHT
-# image is assumed to be a linearly scaled inverse variance map, which I am
-# confident is the case if final_wht_type='ERR', and so scaling of values (v)
-# is scaled as sigma = f/sqrt(v), where f is a scaling factor described above.
-# =============================================================================
+   """
+   Produces a sigma image by empirically estimating the scaling factor between
+   the true SCI background standard deviation and the average value of the WHT
+   image.
+
+   Parameters
+   ----------
+   file : str
+      FITS file path.
+      
+   box_size : float, optional
+      Desired estimation box size, in pixels. The default is 100.
+      
+   purity : float, optional
+      Required purity fraction, e.g. how much of a drawn box can be masked
+      (covered by a bright source). The default is 0.05.
+      
+   overlap : float, optional
+      Acceptable overlap fraction between drawn boxes. The default is 0.2.
+      
+   nbox_min : int, optional
+      Minimum number of boxes to draw. The default is 20.
+
+   Returns
+   -------
+   Array sigma image.
+   
+   Notes
+   -----
+   The WHT image is assumed to be a linearly scaled inverse variance map, which
+   I am confident is the case if final_wht_type='ERR' in HST drizzling, and so
+   scaling of values (v) is scaled as sigma = f/sqrt(v), where f is a scaling
+   factor described above.
+   
+   In plain English, the logic here is that there is an unknown scaling factor
+   in HST drizzling when producing an error map between the true sigma of a
+   given pixel and the inverse-square presented in an error map. If we assume
+   this scaling factor is linear, we can approximate it by drawing many
+   rectangular regions in background parts of the image and taking the standard
+   deviation of the real pixels, and comparing to the average
+   inverse-square-root of the error map.  If this scaling factor is 1, the two
+   values should be the same; otherwise, it can easily be determined.
+
+   """
    #Get basic data from files  
    image = get_pkg_data_filename(file)
    data_sci = fits.getdata(image, ext=1)
@@ -1409,6 +1576,29 @@ def errmap_HST(file, box_size=100, purity=0.05, overlap=0.2, nbox_min=20):
 
 
 def errfile(file, outputdir, name="errmap.fits", **kwargs):
+   """
+   Produces a copy of the given HST file but with the data under the first
+   header replaced by an errmap produced by errmap_HST().
+
+   Parameters
+   ----------
+   file : str
+      File path of HST FITS file.
+      
+   outputdir : str
+      Output directory.
+      
+   name : str, optional
+      DDesired file name of the output error map. The default is "errmap.fits".
+      
+   **kwargs
+      Passed to errmap_hst().
+
+   Returns
+   -------
+   None.
+
+   """
 # =============================================================================
 # This function takes a file path of a HST FITS file (file), an output
 # directory (outputdir), and an optional name (name) and makes a file which
