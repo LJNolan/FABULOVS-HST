@@ -53,7 +53,7 @@ def get_stats(image, coords=None, gain=1, segmap_deb=None, indices=None):
    for n in indices:
       morph = source_morphs[n-1]
       stats_list.append([n, morph.asymmetry, morph.shape_asymmetry,
-                         morph.gini_m20_merger])
+                         morph.gini_m20_merger, morph.gini_m20_bulge])
    return stats_list
 
 
@@ -204,8 +204,8 @@ def automate1(c, side, scale, control, res):
 
 
 def automate2(control, skipbad=True):
-   heads = ['Name', 'ID', 'Net Asym', 'Net SAsym', 'Net GM20', 'Sub Asym',
-            'Sub SAsym', 'Sub GM20']
+   heads = ['Name', 'ID', 'Net Asym', 'Net SAsym', 'Net GM20m', 'Net GM20b',
+            'Sub Asym', 'Sub SAsym', 'Sub GM20m', 'Sub GM20b']
    stats = []
    scale = [0.06]
    if not control:
@@ -237,5 +237,5 @@ def automate2(control, skipbad=True):
    return tab
 
 
-control = False
+control = True
 tab = automate2(control)

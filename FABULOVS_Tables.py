@@ -63,9 +63,9 @@ def composed_table(cols=None, comps=False, soi=True, control=True):
    if soi and control:
       mega_tab = vstack([soi_mega_tab, con_mega_tab])
    elif soi:
-      mega_tab= Table(soi_mega_tab, masked=True, copy=True)
+      mega_tab = Table(soi_mega_tab, masked=True, copy=True)
    elif control:
-      mega_tab= Table(con_mega_tab, masked=True, copy=True)
+      mega_tab = Table(con_mega_tab, masked=True, copy=True)
    else:
       print("What are you doing?  'soi' and 'control' are both False!")
       return
@@ -81,17 +81,20 @@ def composed_table(cols=None, comps=False, soi=True, control=True):
    namefix = ['Name', 'ID', 'Sample', r'Fit $\chi^{2}/\nu$',
               'Component', r'$X_{pix}$', r'$Y_{pix}$', 'Mag', r'$R_{eff} [pix]$',
               r'Sérsic index', 'Axis Ratio', 'Pos. Angle', r'$A_{net}$',
-              r'$A_{S, net}$', r'S(G, M$_{20}$)$_{net}$', r'$A_{sub}$',
-              r'$A_{S, sub}$', r'S(G, M$_{20}$)$_{sub}$']
+              r'$A_{S, net}$', r'S(G, M$_{20}$)$_{net}$',
+              r'F(G, M$_{20}$)$_{net}$', r'$A_{sub}$', r'$A_{S, sub}$',
+              r'S(G, M$_{20}$)$_{sub}$', r'F(G, M$_{20}$)$_{sub}$']
    for i, name in enumerate(mega_tab.colnames):
       mega_tab.rename_column(name, namefix[i])
    
    # Rounding
    num_names = [r'Fit $\chi^{2}/\nu$', r'$X_{pix}$', r'$Y_{pix}$',
-                'Mag', r'$R_{eff} [pix]$', r'Sérsic index', 'Axis Ratio', 'Pos. Angle', r'$A_{net}$',
-              r'$A_{S, net}$', r'S(G, M$_{20}$)$_{net}$', r'$A_{sub}$',
-              r'$A_{S, sub}$', r'S(G, M$_{20}$)$_{sub}$']
-   decimals = [2, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2]
+                'Mag', r'$R_{eff} [pix]$', r'Sérsic index', 'Axis Ratio',
+                'Pos. Angle', r'$A_{net}$', r'$A_{S, net}$',
+                r'S(G, M$_{20}$)$_{net}$', r'F(G, M$_{20}$)$_{net}$',
+                r'$A_{sub}$', r'$A_{S, sub}$', r'S(G, M$_{20}$)$_{sub}$',
+                r'F(G, M$_{20}$)$_{sub}$']
+   decimals = [2, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2]
    mega_tab = round_table_dec(mega_tab, num_names, decimals)
    
    # Generate other tables
@@ -103,7 +106,8 @@ def composed_table(cols=None, comps=False, soi=True, control=True):
    
    stats = ['Name', 'Sample', r'Fit $\chi^{2}/\nu$', r'Sérsic index',
             r'$A_{net}$', r'$A_{S, net}$', r'S(G, M$_{20}$)$_{net}$',
-            r'$A_{sub}$', r'$A_{S, sub}$', r'S(G, M$_{20}$)$_{sub}$']
+            r'F(G, M$_{20}$)$_{net}$', r'$A_{sub}$', r'$A_{S, sub}$',
+            r'S(G, M$_{20}$)$_{sub}$', r'F(G, M$_{20}$)$_{sub}$']
    stats_tab = mega_tab[stats].copy()[~mega_tab['Name'].mask]
       
    if cols is None:
@@ -246,7 +250,7 @@ def doit(what):
    for ax in g.axes.flat:
        ax.set_title(ax.get_title(), y=-0.12, va='top')
    g.set_xlabels('')
-   g.add_legend(loc='upper center', bbox_to_anchor=(0.4, 0.3))
+   g.add_legend(loc='upper center', bbox_to_anchor=(0.6, 0.65))
 # =============================================================================
 # Non-functional attempt to make hatching appear in boxplot legend
 #    if what == 'box':
@@ -298,8 +302,10 @@ def ref_tab():
 
 def match_and_append(table1, table2, columns_to_append):
    # Create SkyCoord objects from RA/DEC columns (assumed in degrees)
-   coords1 = SkyCoord(ra=table1['RA'].values*u.deg, dec=table1['DEC'].values*u.deg)
-   coords2 = SkyCoord(ra=table2['RA'].values*u.deg, dec=table2['DEC'].values*u.deg)
+   coords1 = SkyCoord(ra=table1['RA'].values*u.deg,
+                      dec=table1['DEC'].values*u.deg)
+   coords2 = SkyCoord(ra=table2['RA'].values*u.deg,
+                      dec=table2['DEC'].values*u.deg)
    
    # Match each coord in table1 to the closest in table2
    idx, _, _ = coords1.match_to_catalog_sky(coords2)
@@ -341,8 +347,9 @@ label1 = 'tab:cat'
 
 name2 = 'stats.tab'
 caption2= '''
-Merger statistics for the SoI and control sample; $A_{net}$, $A_{S, net}$, and
-S(G, M$_{20}$)$_{net}$ are the asymmetry, shape asymmetry, and Gini-M20 metrics
+Merger statistics for the SoI and control sample; $A_{net}$, $A_{S, net}$,
+S(G, M$_{20}$)$_{net}$, and F(G, M$_{20}$)$_{net}$ are the asymmetry, shape
+asymmetry, and Gini-M20 metrics (merger and bulge, respectively)
 as described in Section \\ref{sec:met} for the full science image, and those
 with the -sub prefix are for the science image minus the central PSF model.
 \\Sersic\\ indices from poorly constrained fits, as above, are marked with an
@@ -360,8 +367,9 @@ label3 = 'tab:avg'
 name4 = 'metastat.tab'
 caption4 = '''
 Statistics ($S$) and p-values ($p$) from the Kolmogorov-Smirnov ($KS$) and
-Mann-Whitney U ($MWU$) tests run on merger statistics.  A p-value of \\leq 0.05
-indicates our SoI and control come from different underlying populations.
+Mann-Whitney U ($MWU$) tests run on merger statistics.  A p-value of
+$\\leq 0.003$ indicates our SoI and control come from different underlying
+populations at roughly $3\\sigma$ confidence.
 '''
 label4 = 'tab:mst'
 
@@ -370,8 +378,9 @@ model_tab, stats_tab = composed_table()
 
 # Compute Averages
 avg_cols = [r'Sérsic index', r'$A_{net}$', r'$A_{S, net}$',
-            r'S(G, M$_{20}$)$_{net}$', r'$A_{sub}$', r'$A_{S, sub}$',
-            r'S(G, M$_{20}$)$_{sub}$']
+            r'S(G, M$_{20}$)$_{net}$', r'F(G, M$_{20}$)$_{net}$', r'$A_{sub}$',
+            r'$A_{S, sub}$', r'S(G, M$_{20}$)$_{sub}$',
+            r'F(G, M$_{20}$)$_{sub}$']
 avgs_soi, avgs_con = [], []
 for col in avg_cols:
    avgs_soi.append(np.mean(stats_tab[stats_tab['Sample'] == 'SoI'][col].data))
