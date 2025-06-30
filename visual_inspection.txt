@@ -1,0 +1,43 @@
+\begin{table*}
+\centering
+\caption{
+Visual analysis results of residuals, as seen in Figure \ref{fig:out}.
+}
+\label{tab:vis}
+\begin{tabular}{p{0.2\textwidth}p{0.65\textwidth}}
+\hline
+Object & Notes \\
+\hline\hline
+\hyperref[fig:soi1]{J0847+3732} & No clear underlying features, slight asymmetry in PSF wings, could be related to close contaminant sources. \\
+\hline
+\hyperref[fig:soi2]{J0852+2004} & Lopsided wings extending to the right and bottom-left, approximately 1'' ($\sim5$kpc). \\
+\hline
+\hyperref[fig:soi3]{J0928+6025} & Roughly half (left) overbright, though some may be due to modeled contaminant to bottom-right. \\
+\hline
+\hyperref[fig:soi4]{J1112+1813} & Asymmetrical extended top-to-bottom feature, though source's elongation implies this is likely a closer to edge-on than face-on galaxy, and may be an effect thereof. \\
+\hline
+\hyperref[fig:soi5]{J1229+0035} & Small ($\lesssim1''$) asymmetrical wing on left. \\
+\hline
+\hyperref[fig:soi6]{J1345+1144} & Clear underlying spiral features, which extend into a tidal arm at top-right. \\
+\hline
+\hyperref[fig:soi7]{J1410+3643} & Bright ring around central AGN, appears similar to tight spiral arms or a sharply cut-off bulge. \\
+\hline
+\hyperref[fig:soi8]{J1537+0055} & Extremely clear underlying spiral, extending into a tidal arm to top-right -- this could be related to nearby contaminant but seems continuous with underlying structure. \\
+\hline
+\hyperref[fig:con2]{003516.88-104731.2} & Faint spiral arms. \\
+\hline
+\hyperref[fig:con3]{005838.95-102651.3} & Modest asymmetry is coincident with PSF arms and primary axis of galaxy. \\
+\hline
+\hyperref[fig:con14]{083158.49+503444.1} & Asymmetry of underlying features cannot be discerned due to large number of central contaminants or bright regions. \\
+\hline
+\hyperref[fig:con25]{093027.21+240232.7} & Small asymmetrical bright region on right. \\
+\hline
+\hyperref[fig:con40]{111800.12+233651.5} & Asymmetrical ring-like isophote coincident with point-like contaminant. \\
+\hline
+\hyperref[fig:con44]{114744.11-014601.5} & Small bright asymmetrical region to the top-right, aligned with modeled contaminant. \\
+\hline
+\hyperref[fig:con48]{121118.66+143810.4} & No visible extended features. \\
+\hline
+\hyperref[fig:con85]{210927.29-061015.1} & Modestly asymmetrical small arms, containing a bright point-like region. \\
+\end{tabular}
+\end{table*}

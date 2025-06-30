@@ -1,1 +1,3 @@
 Code utilized in Nolan et al. 2025, FABULOVS-HST.  AFFOGATO and supernolan both may have general use, and are written with thorough documentation.  AFFOGATO will be the subject of a follow-up letter to the Journal of Open Source Software, and updated versions may be present in a separate, dedicated repository.  All other code should be workable in the supplied environment.yml, assuming one has downloaded the appropriate files as linked in our paper.
+
+Our paper references both example GALFIT files and visual inspections - these can be found as 'input/4701' and 'visual_inspections.txt' respectively.
